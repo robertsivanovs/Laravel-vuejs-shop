@@ -7,7 +7,7 @@
     <title>Ziemassvētku eglītes</title>
 </head>
 <body>
-    <a href="https://www.eglitetev.lv">
+    <a href="/">
     <img class="banner" src="{{URL::asset('christmas-stuff-header.jpg')}}" alt="img" /> </a>
     <ul>
         <li><a class="button" href="/">Iegādāties eglīti</a></li>

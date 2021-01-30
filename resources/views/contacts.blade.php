@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="egles/magnific-popup.css">
+    <link rel="stylesheet" href="{{URL::asset('css/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/style.css')}}">
     
     <title>Kontakti un atrašanās vietas</title>
@@ -65,7 +65,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="{{URL::asset('js/script.js')}}"></script>
 <!-- Magnific Popup core JS file -->
-<script src="egles/jquery.magnific-popup.js"></script>
+<script src="{{URL::asset('js/jquery.magnific-popup.js')}}"></script>
 <script>
 $('.image-link-mols').magnificPopup({
     items: {
