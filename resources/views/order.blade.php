@@ -12,9 +12,9 @@
     <a href="https://www.eglitetev.lv">
         <img class="banner" src="{{URL::asset('christmas-stuff-header.jpg')}}" alt="img" /> </a>
     <ul>
-    <li><a class="main-menu-button" href="/">Iegādāties eglīti</a></li>
-        <li><a class="main-menu-button" href="/contacts">Tirdzniecības vietas</a></li>
-    </ul>
+    <!-- Main navigation panel component -->
+    @component('components/nav')
+    @endcomponent
     <div class="return-from-order">
         <p style="background-color: #4BB543; font-size: 25px"> Paldies! Jūsu pasūtījums ir saņemts! </p>
         <p> Tuvākajā laikā mēs ar Jums sazināsimies, lai precizētu pasūtījuma detaļas! </p>
@@ -36,6 +36,9 @@
 
         <input type="button" value="Atgriezties" class="close_popupform_button">
     </div>
+    <!-- Footer component -->
+    @component('components/footer')
+    @endcomponent
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>

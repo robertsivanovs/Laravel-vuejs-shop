@@ -10,11 +10,10 @@
 
 <body>
     <a href="/">
-        <img class="banner" src="{{URL::asset('christmas-stuff-header.jpg')}}" alt="img" /> </a>
-    <ul>
-        <li><a class="main-menu-button" href="/">Iegādāties eglīti</a></li>
-        <li><a class="main-menu-button" href="/contacts">Tirdzniecības vietas</a></li>
-    </ul>
+        <img class="banner" src="{{URL::asset('christmas-stuff-header.jpg')}}" alt="img" /></a>
+        <!-- Main navigation panel component -->
+        @component('components/nav')
+        @endcomponent
     <div class="container">
         <div class="egle-viens-bilde">
             <h3> Dāņu nordmann premium extra: </h3>
@@ -114,14 +113,9 @@
         </form>
     </div>
     </div>
-    <ul class="signature">
-        <footer>
-            <strong>
-                <p class="author"> Autors : Roberts Ivanovs |
-            </strong>
-            <u> <a href="http://www.linkedin.com/in/roberts-ivanovs" target="_blank"> Linkedin Profils </a> </u> </p>
-        </footer>
-    </ul>
+    <!-- Footer component -->
+    @component('components/footer')
+    @endcomponent
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="{{URL::asset('js/script.js')}}"></script>

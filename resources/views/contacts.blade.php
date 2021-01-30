@@ -14,10 +14,9 @@
     <a href="https://www.eglitetev.lv">
         <img class="banner" src="{{URL::asset('christmas-stuff-header.jpg')}}" alt="img" />
     </a>
-    <ul>
-        <li><a class="main-menu-button" href="/">Iegādāties eglīti</a></li>
-        <li><a class="main-menu-button" href="/contacts">Tirdzniecības vietas</a></li>
-    </ul>
+    <!-- Main navigation panel component -->
+    @component('components/nav')
+    @endcomponent
     <h1 style="text-align: center;"> KONTAKTI </h1>
     <hr>
     <div class="container">
@@ -58,14 +57,9 @@
             <p> S-Sv: 10:00 - 22:00 </p>
         </div>
     </div>
-    <ul class="signature">
-        <footer>
-            <strong>
-                <p class="author"> Autors : Roberts Ivanovs |
-            </strong>
-            <u> <a href="http://www.linkedin.com/in/roberts-ivanovs" target="_blank"> Linkedin Profils </a> </u> </p>
-        </footer>
-    </ul>
+    <!-- Footer component -->
+    @component('components/footer')
+    @endcomponent
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{URL::asset('js/script.js')}}"></script>
     <!-- Magnific Popup core JS file -->
