@@ -11,7 +11,6 @@
 <body>
     <a href="https://www.eglitetev.lv">
         <img class="banner" src="{{URL::asset('christmas-stuff-header.jpg')}}" alt="img" /> </a>
-    <ul>
     <!-- Main navigation panel component -->
     @component('components/nav')
     @endcomponent
