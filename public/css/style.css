@@ -130,26 +130,23 @@ li a:hover {
 /**** INDEX VIEW ****/
 
 /* Christmas tree main divs */
-.egle-viens-bilde {
+.produkts {
     width: 33%;
-    margin-left: 50px;
     position: relative;
-    border: solid 5px hsla(0, 95%, 35%, 1);
-    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
     padding: 1em;
     line-height: 1.5em;
     background: hsla(67, 95%, 95%, 1);
 }
+.egle-viens-bilde {
+    margin-left: 50px;
+    border: solid 5px hsla(0, 95%, 35%, 1);
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
 
 .egle-divi-bilde {
-    width: 33%;
     margin-left: 280px;
-    position: relative;
     border: dotted 5px hsla(0, 95%, 35%, 1);
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-    padding: 1em;
-    line-height: 1.5em;
-    background: hsla(67, 95%, 95%, 1);
 }
 
 .main-description {
@@ -162,8 +159,7 @@ li a:hover {
 }
 
 /* Christmas tree images */
-.egle-viens-bilde img,
-.egle-divi-bilde img {
+.produkts img {
     width: 100%;
     min-width: 230px;
     min-height: 540px;
@@ -174,7 +170,7 @@ li a:hover {
 }
 
 /* Next button on images to switch christmas tree images */
-a.control_next {
+a.control_prev, a.control_next {
     position: absolute;
     top: 40%;
     z-index: 8;
@@ -191,7 +187,7 @@ a.control_next {
     cursor: pointer;
 }
 
-a.control_next:hover {
+a.control_prev:hover, a.control_next:hover {
     opacity: 1;
     -webkit-transition: all 0.2s ease;
 }
@@ -200,6 +196,10 @@ a.control_next {
     right: 0;
     border-radius: 2px 0 0 2px;
 }
+
+a.control_prev {
+    border-radius: 0 2px 2px 0;
+  }
 
 /** Christmas tree price and size select **/
 .select-css {
