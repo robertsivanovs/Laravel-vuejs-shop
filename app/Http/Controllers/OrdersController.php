@@ -28,7 +28,7 @@ class OrdersController extends Controller
                 'egles_tips' => 'required|regex:/[a-zA-ZĀ-Žā-ž\s]{5,}/|max:50',
                 'egles_skaits' => 'required|digits:1',
                 'egles_izmers' => 'required|digits:3',
-                'egles_cena' => 'required|regex:/[A-Za-z0-9\s]{3,}/|max:50',
+                'egles_cena' => 'required|numeric|digits_between:2,3',
             ]);
 
             // If validation was successfull

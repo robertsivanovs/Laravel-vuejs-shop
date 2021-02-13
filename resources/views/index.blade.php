@@ -28,7 +28,7 @@
                                 Premium extra augstākās klases šķirne. </strong>
                         </p>
                         <p>Izmērs:
-                            <select name="izmers" id="izmeri" class="select-css" v-model="tree_sizes.tree_size_danish" @click="setPrice('danish')">
+                            <select name="izmers" id="izmeri" class="select-css" v-model="tree_sizes.size_danish_tree" @click="setPrice('danish')">
                                 <option value="160">160cm</option>
                                 <option value="170">170cm</option>
                                 <option value="180">180cm</option>
@@ -53,7 +53,7 @@
                             <strong>
                                 <p> Cena: <span id="front_price1"> 0 </span> </p>
                             </strong>
-                            <input type="button" value="Pasūtīt" class="order-button" id="order_button1" @click="appendOrderInfoToForm('Dāņu nordman premium extra')">
+                            <input type="button" value="Pasūtīt" class="order-button" id="order_button1" @click="appendOrderInfoToForm('danish')">
                         </p>
             </div>
             <div class="egle-divi-bilde produkts">
@@ -66,7 +66,7 @@
                             <strong>Latvijas audzētavas Ziemassvētku eglītes, skaistas, ļoti kuplas un smaržīgas.</strong>
                         </p>
                         <p>Izmērs:
-                            <select name="izmers2" id="izmeri1" class="select-css" v-model="tree_sizes.tree_size_lv" @click="setPrice('lv')">
+                            <select name="izmers2" id="izmeri1" class="select-css" v-model="tree_sizes.size_lv_tree" @click="setPrice('lv')">
                                 <option value="160">160cm</option>
                                 <option value="170">170cm</option>
                                 <option value="180">180cm</option>
@@ -101,14 +101,14 @@
                 {{ csrf_field() }}
                 <div class="order-items">
                     <b><span>Egles tips</span>: <span class="popup-egles-tips"> @{{ tree_type }}</span><br>
-                        <input type="text" name="egles_tips" id="egles_tips" hidden>
-                        <span>Skaits</span> : <span class="popup-egles-skaits">  </span><span> GAB </span><br>
-                        <input type="text" name="egles_skaits" id="egles_skaits" hidden>
-                        <span>Izmērs</span> : <span class="popup-egles-izmers"> </span> <span> CM </span><br>
-                        <input type="text" name="egles_izmers" id="egles_izmers" hidden>
+                        <input type="text" name="egles_tips" id="egles_tips" v-model="tree_type" hidden>
+                        <span>Skaits</span> : <span class="popup-egles-skaits">  </span><span> @{{ tree_front_amount }} GAB </span><br>
+                        <input type="text" name="egles_skaits" id="egles_skaits" v-model="tree_front_amount" hidden>
+                        <span>Izmērs</span> : <span class="popup-egles-izmers"> </span> <span> @{{ tree_front_size }} CM </span><br>
+                        <input type="text" name="egles_izmers" id="egles_izmers" v-model="tree_front_size" hidden>
 
-                        <span>Cena</span> : <span class="popup-egles-cena"> </span> </b> <br>
-                    <input type="text" name="egles_cena" id="egles_cena" hidden>
+                        <span>Cena</span> : <span class="popup-egles-cena"> </span> @{{ tree_front_price }} EUR</b> <br>
+                    <input type="text" name="egles_cena" id="egles_cena" v-model="tree_front_price" hidden>
                 </div>
                 <div class="contact-info">
                     <span> Vārds </span> : <br> <input type="text" name="name" id="client-name" required pattern="[a-zA-ZĀ-Žā-ž]{3,}" title="Jūsu vārds - vismaz 3 burti"> <br>

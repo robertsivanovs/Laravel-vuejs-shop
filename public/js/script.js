@@ -4,27 +4,26 @@ var app = new Vue({
         return {
             show_popupform: false,
             tree_type: "",
+            tree_front_price: 0,
+            tree_front_size: 0,
+            tree_front_amount: 0,
 
             tree_sizes: {
-                tree_size_lv: 160,
-                tree_size_danish: 160
+                size_lv_tree: 160,
+                size_danish_tree: 160,
             },
-
             tree_amount: {
                 amount_danish_tree: 1,
                 amount_lv_tree: 1,
             },
-
             tree_prices: {
                 danish_tree_price: false,
-                lv_tree_price: false
+                lv_tree_price: false,
             },
-            
             indexes: {
                 danish_index: 0,
                 lv_index: 0,
             },
-
             danish_image: null,
             lv_image: null,
             danish_images: [
@@ -62,8 +61,8 @@ var app = new Vue({
     mounted() {
         /* Set default product images and prices */
         this.setDefaultImage();
-        this.setPrice('danish');
-        this.setPrice('lv');
+        this.setPrice("danish");
+        this.setPrice("lv");
 
         /* Validation for empty or too short clients name or phone number fields */
         /* Rest of the validation is done server-side */
@@ -85,12 +84,10 @@ var app = new Vue({
                 }
             }
         });
-
     },
     methods: {
         setPrice(tree_type) {
             if (tree_type == "danish") {
-                
                 var price_koef = 35;
                 var baltegle_cenas_35 = ["160", "170", "180"];
                 var baltegle_cenas_40 = ["190"];
@@ -124,61 +121,77 @@ var app = new Vue({
                         price_koef = 80;
                     }
                 });
-                
+
                 if ($("#skaiti").val() !== "3+") {
                     $("#front_price1").html(
                         price_koef * $("#skaiti").val() + " EUR"
-                        );
-                    } else {
-                        $("#front_price1").html(
-                            "Individuāli vienojoties telefoniski"
-                        );
-                        return this.tree_prices.danish_tree_price = "Individuāli vienojoties telefoniski";
-                    }
-                this.tree_prices.danish_tree_price = price_koef * $("#skaiti").val();
+                    );
+                } else {
+                    $("#front_price1").html(
+                        "Individuāli vienojoties telefoniski"
+                    );
+                    return (this.tree_prices.danish_tree_price =
+                        "Individuāli vienojoties telefoniski");
+                }
+                this.tree_prices.danish_tree_price =
+                    price_koef * $("#skaiti").val();
             }
 
             if (tree_type === "lv") {
-
                 var price_koef = 20;
                 var latvijas_cenas_20 = ["160", "170"];
                 var latvijas_cenas_25 = ["180", "190", "200"];
                 var latvijas_cenas_35 = ["210", "220", "230"];
 
-                    $.each(latvijas_cenas_20, function (index, value) {
-                        if (value === $("#izmeri1").val()) {
-                            price_koef = 20;
-                        }
-                    });
-
-                    $.each(latvijas_cenas_25, function (index, value) {
-                        if (value === $("#izmeri1").val()) {
-                            price_koef = 25;
-                        }
-                    });
-
-                    $.each(latvijas_cenas_35, function (index, value) {
-                        if (value === $("#izmeri1").val()) {
-                            price_koef = 35;
-                        }
-                    });
-
-                    if ($("#skaiti1").val() !== "3+") {
-                        $("#front_price2").html(
-                            price_koef * $("#skaiti1").val() + " EUR"
-                        );
-                    } else {
-                        $("#front_price2").html(
-                            "Individuāli vienojoties telefoniski"
-                        );
+                $.each(latvijas_cenas_20, function (index, value) {
+                    if (value === $("#izmeri1").val()) {
+                        price_koef = 20;
                     }
+                });
 
+                $.each(latvijas_cenas_25, function (index, value) {
+                    if (value === $("#izmeri1").val()) {
+                        price_koef = 25;
+                    }
+                });
+
+                $.each(latvijas_cenas_35, function (index, value) {
+                    if (value === $("#izmeri1").val()) {
+                        price_koef = 35;
+                    }
+                });
+
+                if ($("#skaiti1").val() !== "3+") {
+                    $("#front_price2").html(
+                        price_koef * $("#skaiti1").val() + " EUR"
+                    );
+                } else {
+                    $("#front_price2").html(
+                        "Individuāli vienojoties telefoniski"
+                    );
+                    return (this.tree_prices.lv_tree_price =
+                        "Individuāli vienojoties telefoniski");
+                }
+                this.tree_prices.lv_tree_price =
+                    price_koef * $("#skaiti1").val();
             }
-
         },
         appendOrderInfoToForm(tree_type) {
             this.tree_type = tree_type;
             this.show_popupform = !this.show_popupform;
+
+            if (tree_type === "danish") {
+                this.tree_type = "Dāņu nordman premium extra";
+                this.tree_front_price = this.tree_prices.danish_tree_price;
+                this.tree_front_size = this.tree_sizes.size_danish_tree;
+                this.tree_front_amount = this.tree_amount.amount_danish_tree
+            }
+            if (tree_type === "lv") {
+                this.tree_type = "Latviešu audzētavas";
+                this.tree_front_price = this.tree_prices.lv_tree_price;
+                this.tree_front_size = this.tree_sizes.size_lv_tree;
+                this.tree_front_amount = this.tree_amount.amount_lv_tree
+            }
         },
         setDefaultImage() {
             this.danish_image = this.danish_images[this.indexes.danish_index];
