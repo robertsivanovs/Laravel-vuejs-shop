@@ -305,7 +305,7 @@ a.control_prev {
     border-radius: 15px;
 }
 
-.close_popupform_link {
+.close-popupform-link {
     float: right;
     color: red;
     font-size: 30px;
@@ -316,7 +316,7 @@ a.control_prev {
 }
 
 /* Order form buttons */
-.order_button,
+.order-button,
 .pieteikt-pasutijumu {
     box-shadow: 0px 10px 14px -7px #3e7327;
     background: linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
@@ -334,19 +334,19 @@ a.control_prev {
     text-shadow: 0px 1px 0px #5b8a3c;
 }
 
-.order_button:hover,
+.order-button:hover,
 .pieteikt-pasutijumu:hover {
     background: linear-gradient(to bottom, #72b352 5%, #77b55a 100%);
     background-color: #72b352;
 }
 
-.order_button:active,
+.order-button:active,
 .pieteikt-pasutijumu:active {
     position: relative;
     top: 1px;
 }
 
-.close_popupform_button {
+.close-popupform-button {
     box-shadow: 0px 10px 14px -7px #1564ad;
     background: linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
     background-color: #79bbff;
@@ -363,12 +363,12 @@ a.control_prev {
     text-shadow: 0px 1px 0px #528ecc;
 }
 
-.close_popupform_button:hover {
+.close-popupform-button:hover {
     background: linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
     background-color: #378de5;
 }
 
-.close_popupform_button:active {
+.close-popupform-button:active {
     position: relative;
     top: 1px;
 }
@@ -526,7 +526,7 @@ footer {
 
     #client-name,
     #client-phone,
-    .order_button,
+    .order-button,
     .main-menu-button,
     li,
     .container {
@@ -552,3 +552,10 @@ footer {
         font-family: "Montserrat", sans-serif;
     }
 }
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }

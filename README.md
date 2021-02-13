@@ -8,7 +8,9 @@ To run this project:
 
 1. Pull
 2. SQL Database dump - orders.sql
-3. Setup Laravel .env variables [You might need to create .env file]
+3. Rename file ".env.example" to ".env"
+4. Setup DB configuration in ".env" file
+5. Run "composer install"
 
 Technologies used:
 

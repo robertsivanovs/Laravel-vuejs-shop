@@ -2,10 +2,29 @@ var app = new Vue({
     el: "#vue-app",
     data() {
         return {
+            show_popupform: false,
+            tree_type: "",
+
+            tree_sizes: {
+                tree_size_lv: 160,
+                tree_size_danish: 160
+            },
+
+            tree_amount: {
+                amount_danish_tree: 1,
+                amount_lv_tree: 1,
+            },
+
+            tree_prices: {
+                danish_tree_price: false,
+                lv_tree_price: false
+            },
+            
             indexes: {
                 danish_index: 0,
                 lv_index: 0,
             },
+
             danish_image: null,
             lv_image: null,
             danish_images: [
@@ -41,43 +60,10 @@ var app = new Vue({
         };
     },
     mounted() {
+        /* Set default product images and prices */
         this.setDefaultImage();
-        $(".order_button").click(function () {
-            $(".popup-form").fadeIn(550);
-        });
-        /* Append users selected christmas tree size and amount to popup order form */
-        $("#order_button1").click(function () {
-            $(".popup-egles-tips").html("Dāņu nordmann premium extra");
-            $(".popup-egles-skaits").html($("#skaiti").val());
-            $(".popup-egles-izmers").html($("#izmeri").val());
-            $(".popup-egles-cena").html($("#front_price1").html());
-
-            $("#egles_tips").val("Dāņu nordmann premium extra");
-            $("#egles_skaits").val($("#skaiti").val());
-            $("#egles_izmers").val($("#izmeri").val());
-            $("#egles_cena").val($("#front_price1").html());
-        });
-
-        $("#order_button2").click(function () {
-            $(".popup-egles-tips").html("Latviešu audzētavas");
-            $(".popup-egles-skaits").html($("#skaiti1").val());
-            $(".popup-egles-izmers").html($("#izmeri1").val());
-            $(".popup-egles-cena").html($("#front_price2").html());
-
-            $("#egles_tips").val("Latviešu audzētavas");
-            $("#egles_skaits").val($("#skaiti1").val());
-            $("#egles_izmers").val($("#izmeri1").val());
-            $("#egles_cena").val($("#front_price2").html());
-        });
-
-        $(".close_popupform_button").click(function () {
-            $(".popup-form").fadeOut(550);
-        });
-
-        $(".close_popupform_link").click(function () {
-            event.preventDefault();
-            $(".popup-form").fadeOut(550);
-        });
+        this.setPrice('danish');
+        this.setPrice('lv');
 
         /* Validation for empty or too short clients name or phone number fields */
         /* Rest of the validation is done server-side */
@@ -100,38 +86,12 @@ var app = new Vue({
             }
         });
 
-        var price_koef = 1;
-
-        /* Set default christmas tree prices */
-        $(function () {
-            set_price_koef(1, 1);
-        });
-
-        /* Set price whenever user updates tree size or amount */
-        $("#izmeri").change(function () {
-            set_price_koef(1);
-        });
-
-        $("#izmeri1").change(function () {
-            set_price_koef(0, 1);
-        });
-
-        $("#skaiti").change(function () {
-            set_price_koef(1);
-        });
-
-        $("#skaiti1").change(function () {
-            set_price_koef(0, 1);
-        });
-
-        /*
-         *    set_price_koef
-         *
-         *    Set price for each christmas tree depending on its size which user selects
-         */
-        function set_price_koef(baltegle, latvijas) {
-            /* Danish christmas tree */
-            if (baltegle) {
+    },
+    methods: {
+        setPrice(tree_type) {
+            if (tree_type == "danish") {
+                
+                var price_koef = 35;
                 var baltegle_cenas_35 = ["160", "170", "180"];
                 var baltegle_cenas_40 = ["190"];
                 var baltegle_cenas_45 = ["200", "210", "220"];
@@ -164,54 +124,62 @@ var app = new Vue({
                         price_koef = 80;
                     }
                 });
-
+                
                 if ($("#skaiti").val() !== "3+") {
                     $("#front_price1").html(
                         price_koef * $("#skaiti").val() + " EUR"
-                    );
-                } else {
-                    $("#front_price1").html(
-                        "Individuāli vienojoties telefoniski"
-                    );
-                }
+                        );
+                    } else {
+                        $("#front_price1").html(
+                            "Individuāli vienojoties telefoniski"
+                        );
+                        return this.tree_prices.danish_tree_price = "Individuāli vienojoties telefoniski";
+                    }
+                this.tree_prices.danish_tree_price = price_koef * $("#skaiti").val();
             }
-            /* Latvian christmas tree */
-            if (latvijas) {
+
+            if (tree_type === "lv") {
+
+                var price_koef = 20;
                 var latvijas_cenas_20 = ["160", "170"];
                 var latvijas_cenas_25 = ["180", "190", "200"];
                 var latvijas_cenas_35 = ["210", "220", "230"];
 
-                $.each(latvijas_cenas_20, function (index, value) {
-                    if (value === $("#izmeri1").val()) {
-                        price_koef = 20;
-                    }
-                });
+                    $.each(latvijas_cenas_20, function (index, value) {
+                        if (value === $("#izmeri1").val()) {
+                            price_koef = 20;
+                        }
+                    });
 
-                $.each(latvijas_cenas_25, function (index, value) {
-                    if (value === $("#izmeri1").val()) {
-                        price_koef = 25;
-                    }
-                });
+                    $.each(latvijas_cenas_25, function (index, value) {
+                        if (value === $("#izmeri1").val()) {
+                            price_koef = 25;
+                        }
+                    });
 
-                $.each(latvijas_cenas_35, function (index, value) {
-                    if (value === $("#izmeri1").val()) {
-                        price_koef = 35;
-                    }
-                });
+                    $.each(latvijas_cenas_35, function (index, value) {
+                        if (value === $("#izmeri1").val()) {
+                            price_koef = 35;
+                        }
+                    });
 
-                if ($("#skaiti1").val() !== "3+") {
-                    $("#front_price2").html(
-                        price_koef * $("#skaiti1").val() + " EUR"
-                    );
-                } else {
-                    $("#front_price2").html(
-                        "Individuāli vienojoties telefoniski"
-                    );
-                }
+                    if ($("#skaiti1").val() !== "3+") {
+                        $("#front_price2").html(
+                            price_koef * $("#skaiti1").val() + " EUR"
+                        );
+                    } else {
+                        $("#front_price2").html(
+                            "Individuāli vienojoties telefoniski"
+                        );
+                    }
+
             }
-        }
-    },
-    methods: {
+
+        },
+        appendOrderInfoToForm(tree_type) {
+            this.tree_type = tree_type;
+            this.show_popupform = !this.show_popupform;
+        },
         setDefaultImage() {
             this.danish_image = this.danish_images[this.indexes.danish_index];
             this.lv_image = this.lv_images[this.indexes.lv_index];
