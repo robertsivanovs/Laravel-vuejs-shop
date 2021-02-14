@@ -28,8 +28,10 @@
                                 Premium extra augstākās klases šķirne. </strong>
                         </p>
                         <p>Izmērs (CM):
-                            <select name="izmers" id="izmeri" class="select-css" v-model="tree_sizes.size_danish_tree" @click="setPrice('danish')">
-                                <option v-for="item in danish_tree_sizes">@{{ item }}</option>                            
+                            <select name="izmers" id="izmeri" class="select-css" v-model="tree_sizes.size_danish_tree" @click="setPrice('danish', $event)">
+                            <template v-for="value, key in tree_prices_sizes.danish">
+                                <option v-for="price in value" :value="price"> @{{ price }}</option> 
+                            </template>                           
                                 </select>
                         </p>
                         <p>Skaits:
@@ -55,8 +57,10 @@
                             <strong>Latvijas audzētavas Ziemassvētku eglītes, skaistas, ļoti kuplas un smaržīgas.</strong>
                         </p>
                         <p>Izmērs (CM):
-                            <select name="izmers2" id="izmeri1" class="select-css" v-model="tree_sizes.size_lv_tree" @click="setPrice('lv')">
-                            <option v-for="item in lv_tree_sizes">@{{ item }}</option>                            
+                            <select name="izmers2" id="izmeri1" class="select-css" v-model="tree_sizes.size_lv_tree" @click="setPrice('lv', $event)">
+                            <template v-for="value, key in tree_prices_sizes.lv">
+                            <option v-for="price in value" :value="price"> @{{ price }}</option> 
+                            </template>
                             </select>
                         </p>
                         <p>Skaits:

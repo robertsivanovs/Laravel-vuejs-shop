@@ -20,17 +20,22 @@ var app = new Vue({
                 danish_tree_price: false,
                 lv_tree_price: false,
             },
-            danish_tree_sizes: [
-                "160", "170", "180", 
-                "190", "200", "210", 
-                "220", "230", "240",
-                "250", "260", "270"
-            ],
-            lv_tree_sizes: [
-                "160", "170", "180", 
-                "190", "200", "210", 
-                "220", "230"
-            ],
+
+            tree_prices_sizes: {
+                danish: {
+                    35: [160, 170, 180],
+                    40: [190],
+                    45: [200, 210, 220],
+                    60: [230, 240],
+                    80: [250, 260, 270],
+                },
+                lv: {
+                    20: [160, 170],
+                    25: [180, 190, 200],
+                    35: [210, 220, 230],
+                },
+            },
+
             indexes: {
                 danish_index: 0,
                 lv_index: 0,
@@ -97,40 +102,16 @@ var app = new Vue({
         });
     },
     methods: {
-        setPrice(tree_type) {
-            if (tree_type == "danish") {
-                var price_koef = 35;
-                var baltegle_cenas_35 = ["160", "170", "180"];
-                var baltegle_cenas_40 = ["190"];
-                var baltegle_cenas_45 = ["200", "210", "220"];
-                var baltegle_cenas_60 = ["230", "240"];
-                var baltegle_cenas_80 = ["250", "260", "270"];
+        setPrice(tree_type, event = null) {
+            var price_koef = 0;
 
-                $.each(baltegle_cenas_35, function (index, value) {
-                    if (value === $("#izmeri").val()) {
-                        price_koef = 35;
-                    }
-                });
-
-                $.each(baltegle_cenas_40, function (index, value) {
-                    if (value === $("#izmeri").val()) {
-                        price_koef = 40;
-                    }
-                });
-                $.each(baltegle_cenas_45, function (index, value) {
-                    if (value === $("#izmeri").val()) {
-                        price_koef = 45;
-                    }
-                });
-                $.each(baltegle_cenas_60, function (index, value) {
-                    if (value === $("#izmeri").val()) {
-                        price_koef = 60;
-                    }
-                });
-                $.each(baltegle_cenas_80, function (index, value) {
-                    if (value === $("#izmeri").val()) {
-                        price_koef = 80;
-                    }
+            if (tree_type == "danish" && event !== null) {
+                $.each(this.tree_prices_sizes.danish, function (index, value) {
+                    $.each(value, function (pos, size) {
+                        if (size == event.target.value) {
+                            price_koef = index;
+                        }
+                    });
                 });
 
                 if ($("#skaiti").val() !== "3+") {
@@ -148,28 +129,13 @@ var app = new Vue({
                     price_koef * $("#skaiti").val();
             }
 
-            if (tree_type === "lv") {
-                var price_koef = 20;
-                var latvijas_cenas_20 = ["160", "170"];
-                var latvijas_cenas_25 = ["180", "190", "200"];
-                var latvijas_cenas_35 = ["210", "220", "230"];
-
-                $.each(latvijas_cenas_20, function (index, value) {
-                    if (value === $("#izmeri1").val()) {
-                        price_koef = 20;
-                    }
-                });
-
-                $.each(latvijas_cenas_25, function (index, value) {
-                    if (value === $("#izmeri1").val()) {
-                        price_koef = 25;
-                    }
-                });
-
-                $.each(latvijas_cenas_35, function (index, value) {
-                    if (value === $("#izmeri1").val()) {
-                        price_koef = 35;
-                    }
+            if (tree_type == "lv" && event !== null) {
+                $.each(this.tree_prices_sizes.lv, function (index, value) {
+                    $.each(value, function (pos, size) {
+                        if (size == event.target.value) {
+                            price_koef = index;
+                        }
+                    });
                 });
 
                 if ($("#skaiti1").val() !== "3+") {
@@ -195,13 +161,13 @@ var app = new Vue({
                 this.tree_type = "Dāņu nordman premium extra";
                 this.tree_front_price = this.tree_prices.danish_tree_price;
                 this.tree_front_size = this.tree_sizes.size_danish_tree;
-                this.tree_front_amount = this.tree_amount.amount_danish_tree
+                this.tree_front_amount = this.tree_amount.amount_danish_tree;
             }
             if (tree_type === "lv") {
                 this.tree_type = "Latviešu audzētavas";
                 this.tree_front_price = this.tree_prices.lv_tree_price;
                 this.tree_front_size = this.tree_sizes.size_lv_tree;
-                this.tree_front_amount = this.tree_amount.amount_lv_tree
+                this.tree_front_amount = this.tree_amount.amount_lv_tree;
             }
         },
         setDefaultImage() {
