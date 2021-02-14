@@ -27,21 +27,10 @@
                             <strong> Importa, skaistas un masīvas egles kurām skujas nebirst līdz pat 3 menešiem.
                                 Premium extra augstākās klases šķirne. </strong>
                         </p>
-                        <p>Izmērs:
+                        <p>Izmērs (CM):
                             <select name="izmers" id="izmeri" class="select-css" v-model="tree_sizes.size_danish_tree" @click="setPrice('danish')">
-                                <option value="160">160cm</option>
-                                <option value="170">170cm</option>
-                                <option value="180">180cm</option>
-                                <option value="190">190cm</option>
-                                <option value="200">200cm</option>
-                                <option value="210">210cm</option>
-                                <option value="220">220cm</option>
-                                <option value="230">230cm</option>
-                                <option value="240">240cm</option>
-                                <option value="250">250cm</option>
-                                <option value="260">260cm</option>
-                                <option value="270">270cm</option>
-                            </select>
+                                <option v-for="item in danish_tree_sizes">@{{ item }}</option>                            
+                                </select>
                         </p>
                         <p>Skaits:
                             <select name="skaits" id="skaiti" class="select-css" v-model="tree_amount.amount_danish_tree" @click="setPrice('danish')">
@@ -53,7 +42,7 @@
                             <strong>
                                 <p> Cena: <span id="front_price1"> 0 </span> </p>
                             </strong>
-                            <input type="button" value="Pasūtīt" class="order-button" id="order_button1" @click="appendOrderInfoToForm('danish')">
+                            <button class="order-button" id="order_button1" @click="appendOrderInfoToForm('danish')">Pasūtīt</button>
                         </p>
             </div>
             <div class="egle-divi-bilde produkts">
@@ -65,16 +54,9 @@
                         <p class="main-description">
                             <strong>Latvijas audzētavas Ziemassvētku eglītes, skaistas, ļoti kuplas un smaržīgas.</strong>
                         </p>
-                        <p>Izmērs:
+                        <p>Izmērs (CM):
                             <select name="izmers2" id="izmeri1" class="select-css" v-model="tree_sizes.size_lv_tree" @click="setPrice('lv')">
-                                <option value="160">160cm</option>
-                                <option value="170">170cm</option>
-                                <option value="180">180cm</option>
-                                <option value="190">190cm</option>
-                                <option value="200">200cm</option>
-                                <option value="210">210cm</option>
-                                <option value="220">220cm</option>
-                                <option value="230">230cm</option>
+                            <option v-for="item in lv_tree_sizes">@{{ item }}</option>                            
                             </select>
                         </p>
                         <p>Skaits:
@@ -87,37 +69,35 @@
                             <strong>
                                 <p>Cena: <span id="front_price2"> 0 </span> </p>
                             </strong>
-                            <input type="button" value="Pasūtīt" class="order-button" id="order_button2" @click="appendOrderInfoToForm('lv')">
-                        </p>
+                            <button class="order-button" id="order_button2" @click="appendOrderInfoToForm('lv')">Pasūtīt</button>
             </div>
         </div>
         <transition name="fade">
-        <div v-if="show_popupform" class="popup-form">
-            <div style="text-align: center" class="order-info">
-                <span> <strong>Jūsu pasūtījuma informācija : </strong> </span>
-                <a class="close-popupform-link" href="#" @click.prevent="show_popupform = !show_popupform">X</a>
-            </div>
-            <form class="order-form" name="order_form" id="order_form" action="orders/order" method="POST">
-                {{ csrf_field() }}
-                <div class="order-items">
-                    <b><span>Egles tips</span>: <span class="popup-egles-tips"> @{{ tree_type }}</span><br>
-                        <input type="text" name="egles_tips" id="egles_tips" v-model="tree_type" hidden>
-                        <span>Skaits</span> : <span class="popup-egles-skaits">  </span><span> @{{ tree_front_amount }} GAB </span><br>
-                        <input type="text" name="egles_skaits" id="egles_skaits" v-model="tree_front_amount" hidden>
-                        <span>Izmērs</span> : <span class="popup-egles-izmers"> </span> <span> @{{ tree_front_size }} CM </span><br>
-                        <input type="text" name="egles_izmers" id="egles_izmers" v-model="tree_front_size" hidden>
-
-                        <span>Cena</span> : <span class="popup-egles-cena"> </span> @{{ tree_front_price }} EUR</b> <br>
-                    <input type="text" name="egles_cena" id="egles_cena" v-model="tree_front_price" hidden>
+            <div v-if="show_popupform" class="popup-form">
+                <div style="text-align: center" class="order-info">
+                    <span> <strong>Jūsu pasūtījuma informācija : </strong> </span>
+                    <a class="close-popupform-link" href="#" @click.prevent="show_popupform = !show_popupform">X</a>
                 </div>
-                <div class="contact-info">
-                    <span> Vārds </span> : <br> <input type="text" name="name" id="client-name" required pattern="[a-zA-ZĀ-Žā-ž]{3,}" title="Jūsu vārds - vismaz 3 burti"> <br>
-                    <span> Telefona Nr.: <br> </span> <input type="text" name="phone" id="client-phone" required pattern="[0-9+-]{8,}" title="Jūsu telefona nummurs - vismaz 8 cipari"> <br>
-                    <span> Ar piegādi </span> <input type="checkbox" name="piegade"> <br>
-                    <input type="submit" value="Pieteikt pasūtījumu" class="pieteikt-pasutijumu">
-                    <input type="button" value="Atgriezties" class="close-popupform-button" @click="show_popupform = !show_popupform">
-            </form>
-        </div>
+                <form class="order-form" name="order_form" id="order_form" action="orders/order" method="POST">
+                    {{ csrf_field() }}
+                    <div class="order-items">
+                        <span>Egles tips: @{{ tree_type }}</span>
+                        <input name="egles_tips" id="egles_tips" v-model="tree_type" hidden>
+                        <span>Skaits: @{{ tree_front_amount }} GAB</span>
+                        <input name="egles_skaits" id="egles_skaits" v-model="tree_front_amount" hidden>
+                        <span>Izmērs: @{{ tree_front_size }} CM</span>
+                        <input name="egles_izmers" id="egles_izmers" v-model="tree_front_size" hidden>
+                        <span>Cena: @{{ tree_front_price }} EUR</span>
+                        <input name="egles_cena" id="egles_cena" v-model="tree_front_price" hidden>
+                    </div>
+                    <div class="contact-info">
+                        <span>Vārds: </span><input type="text" name="name" id="client-name" required pattern="[a-zA-ZĀ-Žā-ž]{3,}" title="Jūsu vārds - vismaz 3 burti">
+                        <span>Telefona Nr.: </span><input type="text" name="phone" id="client-phone" required pattern="[0-9+-]{8,}" title="Jūsu telefona nummurs - vismaz 8 cipari">
+                        <span>Ar piegādi <input type="checkbox" name="piegade"></span>
+                        <input type="submit" value="Pieteikt pasūtījumu" class="pieteikt-pasutijumu">
+                        <button class="close-popupform-button" @click="show_popupform = !show_popupform">Atgriezties</button>
+                </form>
+            </div>
         </transition>
     </div>
     </div>

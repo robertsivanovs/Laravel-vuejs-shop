@@ -17,11 +17,14 @@
     <!-- Main navigation panel component -->
     @component('components/nav')
     @endcomponent
-    <h1 style="text-align: center;"> KONTAKTI </h1>
+    <header>
+    <h1>KONTAKTI</h1>
     <hr>
+    </header>
+
     <div class="container">
         <div class="dole">
-            <h3 style="color: #02508F; font-size: 26px;"> Tirdzniecības centrs “Dole” </h3>
+            <h3> Tirdzniecības centrs “Dole” </h3>
             <div class="adrese-dole">
                 <p> Adrese: Maskavas iela 357, Rīga, LV-1063 </p>
             </div>
@@ -33,7 +36,7 @@
             </div>
         </div>
         <div class="mols">
-            <h3 style="color: #02508F; font-size: 26px;"> Tirdzniecības centrs "Mols" </h3>
+            <h3> Tirdzniecības centrs "Mols" </h3>
             <div class="adrese-mols">
                 <p> Adrese: Krasta iela 46, Rīga LV-1003 </p>
             </div>
@@ -46,7 +49,7 @@
         </div>
     </div>
     <div class="maltas">
-        <h3 style="color: #02508F; font-size: 26px;">Maltas iela 49, Latgales priekšpilsēta, Rīga, LV-1057</h3>
+        <h3>Maltas iela 49, Latgales priekšpilsēta, Rīga, LV-1057</h3>
         <div class="adrese-mols">
             <p> Adrese: Maltas iela 49, Latgales priekšpilsēta, Rīga, LV-1057 </p>
         </div>
@@ -61,7 +64,6 @@
     @component('components/footer')
     @endcomponent
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{{URL::asset('js/script.js')}}"></script>
     <!-- Magnific Popup core JS file -->
     <script src="{{URL::asset('js/jquery.magnific-popup.js')}}"></script>
     <script>

@@ -20,6 +20,17 @@ var app = new Vue({
                 danish_tree_price: false,
                 lv_tree_price: false,
             },
+            danish_tree_sizes: [
+                "160", "170", "180", 
+                "190", "200", "210", 
+                "220", "230", "240",
+                "250", "260", "270"
+            ],
+            lv_tree_sizes: [
+                "160", "170", "180", 
+                "190", "200", "210", 
+                "220", "230"
+            ],
             indexes: {
                 danish_index: 0,
                 lv_index: 0,

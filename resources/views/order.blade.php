@@ -33,7 +33,7 @@
 
         <p> Pasūtījuma datums / laiks : <b><br> {{ \Carbon\Carbon::now()->format('d.m.Y H:i:s') }}</b> </p>
 
-        <input type="button" value="Atgriezties" class="close_popupform_button">
+        <input type="button" value="Atgriezties" class="close-popupform-button">
     </div>
     <!-- Footer component -->
     @component('components/footer')
@@ -45,7 +45,7 @@
         window.history.replaceState(null, null, window.location.href);
     }
 
-    $(".close_popupform_button").click(function() {
+    $(".close-popupform-button").click(function() {
         $(location).attr('href', '/');
     });
 </script>
