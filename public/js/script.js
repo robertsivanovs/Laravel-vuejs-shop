@@ -46,7 +46,7 @@ var app = new Vue({
                 {
                     id: 1,
                     src:
-                        "https://eglitetev.lv/egles/nordman/0ddce42e-2d35-4aa0-8a21-d6fde47b8fae.JPG",
+                        "../egles/IMG_7391.JPG",
                     alt: "Dāņu nordman",
                 },
                 {
