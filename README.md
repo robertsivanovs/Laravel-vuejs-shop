@@ -29,7 +29,7 @@ Technologies used:
  ### Preview:
  
  ### Index view:
-![Index view](https://i.ibb.co/fXG01X7/Screenshot-2021-02-06-Ziemassv-tku-egl-tes.jpg "Index view")
+![Index view](https://i.imgur.com/HdS2QfJ.png "Index view")
 ### Order form:
 ![Order form](https://i.ibb.co/dgv7VvR/Screenshot-2021-02-06-Ziemassv-tku-egl-tes.png "Order form")
 ### Order result:
