@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Ziemassvētku eglītes</title>
 </head>
-
 <body>
     <div id="vue-app">
         <div class="header-container">
@@ -24,72 +22,71 @@
                     <a href="#" class="fa fa-snapchat-ghost"></a>
                 </div>
             </div>
-
             <a href="/">
                 <img class="banner" src="{{URL::asset('banner_new.jpg')}}" alt="img" /></a>
             <!-- Main navigation panel component -->
             @component('components/nav')
             @endcomponent
-    </div>
-
+        </div>
         <div class="container">
             <div class="egle-viens-bilde produkts">
                 <h3> Dāņu nordmann premium extra: </h3>
                 <img id="danu-baltegle" v-if="danish_image" :key="danish_image.id" @click="switchNextImage('danish')" :src="danish_image.src">
                 <a href="#" class="control_next" @click.prevent="switchNextImage('danish')">></a>
                 <a href="#" class="control_prev" @click.prevent="switchPrevImage('danish')"><</a>
-                        <hr>
-                        <p class="main-description">
-                            <strong> Importa, skaistas un masīvas egles kurām skujas nebirst līdz pat 3 menešiem.
-                                Premium extra augstākās klases šķirne. </strong>
-                        </p>
-                        <p>Izmērs (CM):
-                            <select name="izmers" id="izmeri" class="select-css" v-model="tree_sizes.size_danish_tree" @click="setPrice('danish', $event)">
-                            <template v-for="value, key in tree_prices_sizes.danish">
-                                <option v-for="price in value" :value="price"> @{{ price }}</option> 
-                            </template>                           
-                                </select>
-                        </p>
-                        <p>Skaits:
-                            <select name="skaits" id="skaiti" class="select-css" v-model="tree_amount.amount_danish_tree" @click="setPrice('danish')">
-                                <option value="1">1 Gab</option>
-                                <option value="2">2 Gab</option>
-                                <option value="3">3 Gab</option>
-                                <option value="3+">Vairāk</option>
-                            </select>
-                            <strong>
-                                <p> Cena: <span id="front_price1"> 0 </span> </p>
-                            </strong>
-                            <button class="order-button" id="order_button1" @click="appendOrderInfoToForm('danish')">Pasūtīt</button>
-                        </p>
+                <hr>
+                <p class="main-description">
+                    <strong> Importa, skaistas un masīvas egles kurām skujas nebirst līdz pat 3 menešiem.
+                                Premium extra augstākās klases šķirne. 
+                    </strong>
+                </p>
+                <p>Izmērs (CM):
+                    <select name="izmers" id="izmeri" class="select-css" v-model="tree_sizes.size_danish_tree" @click="setPrice('danish', $event)">
+                        <template v-for="value, key in tree_prices_sizes.danish">
+                            <option v-for="price in value" :value="price"> @{{ price }}</option> 
+                        </template>                           
+                    </select>
+                </p>
+                <p>Skaits:
+                    <select name="skaits" id="skaiti" class="select-css" v-model="tree_amount.amount_danish_tree" @click="setPrice('danish')">
+                        <option value="1">1 Gab</option>
+                        <option value="2">2 Gab</option>
+                        <option value="3">3 Gab</option>
+                        <option value="3+">Vairāk</option>
+                    </select>
+                    <strong>
+                        <p>Cena:<span id="front_price1">0</span></p>
+                    </strong>
+                    <button class="order-button" id="order_button1" @click="appendOrderInfoToForm('danish')">Pasūtīt</button>
+                </p>
             </div>
             <div class="egle-divi-bilde produkts">
                 <h3> Latviešu audzētavas: </h3>
-                <img id="lat-egle" v-if="lv_image" :key="lv_image.id" @click="switchNextImage('lv')" :src="lv_image.src">
+                <img id="lat-egle" v-if="lv_image" :key="lv_image.id" @click="switchNextImage('lv')" :src="lv_image.src"/>
                 <a href="#" class="control_next" @click.prevent="switchNextImage('lv')">></a>
                 <a href="#" class="control_prev" @click.prevent="switchPrevImage('lv')"><</a>
-                        <hr>
-                        <p class="main-description">
-                            <strong>Latvijas audzētavas Ziemassvētku eglītes, skaistas, ļoti kuplas un smaržīgas.</strong>
-                        </p>
-                        <p>Izmērs (CM):
-                            <select name="izmers2" id="izmeri1" class="select-css" v-model="tree_sizes.size_lv_tree" @click="setPrice('lv', $event)">
-                            <template v-for="value, key in tree_prices_sizes.lv">
+                <hr>
+                <p class="main-description">
+                    <strong>Latvijas audzētavas Ziemassvētku eglītes, skaistas, ļoti kuplas un smaržīgas.</strong>
+                </p>
+                <p>Izmērs (CM):
+                    <select name="izmers2" id="izmeri1" class="select-css" v-model="tree_sizes.size_lv_tree" @click="setPrice('lv', $event)">
+                        <template v-for="value, key in tree_prices_sizes.lv">
                             <option v-for="price in value" :value="price"> @{{ price }}</option> 
-                            </template>
-                            </select>
-                        </p>
-                        <p>Skaits:
-                            <select name="skaits" id="skaiti1" class="select-css" v-model="tree_amount.amount_lv_tree" @click="setPrice('lv')">
-                                <option value="1">1 Gab</option>
-                                <option value="2">2 Gab</option>
-                                <option value="3">3 Gab</option>
-                                <option value="3+">Vairāk</option>
-                            </select>
-                            <strong>
-                                <p>Cena: <span id="front_price2"> 0 </span> </p>
-                            </strong>
-                            <button class="order-button" id="order_button2" @click="appendOrderInfoToForm('lv')">Pasūtīt</button>
+                        </template>
+                    </select>
+                </p>
+                <p>Skaits:
+                    <select name="skaits" id="skaiti1" class="select-css" v-model="tree_amount.amount_lv_tree" @click="setPrice('lv')">
+                        <option value="1">1 Gab</option>
+                        <option value="2">2 Gab</option>
+                        <option value="3">3 Gab</option>
+                        <option value="3+">Vairāk</option>
+                    </select>
+                    <strong>
+                        <p>Cena: <span id="front_price2"> 0 </span></p>
+                    </strong>
+                    <button class="order-button" id="order_button2" @click="appendOrderInfoToForm('lv')">Pasūtīt</button>
             </div>
         </div>
         <transition name="fade">
