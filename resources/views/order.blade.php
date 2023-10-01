@@ -4,14 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{URL::asset('css/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Ziemassvētku eglītes</title>
 </head>
 <body>
-    <a href="https://www.eglitetev.lv">
-        <img class="banner" src="{{URL::asset('christmas-stuff-header.jpg')}}" alt="img" /> </a>
-    <!-- Main navigation panel component -->
-    @component('components/nav')
-    @endcomponent
+    <div class="header-container">
+        <div class="header-banner">
+            <div class="banner-text-container">
+                <span class="banner-text">Eglīte Tev!</span>
+                <div class="banner-contacts">
+                    <span class="banner-text-telephone">T: +371 22222222</span>
+                    <span class="banner-text-email">E: eglitetev@eglitetev.lv</span>
+                </div>
+                <div class="banner-social">
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                    <a href="#" class="fa fa-snapchat-ghost"></a>
+                </div>
+            </div>
+        </div>
+        <!-- Main navigation panel component -->
+        @component('components/nav')
+        @endcomponent
+    </div>
     <div class="return-from-order">
         <p style="background-color: #4BB543; font-size: 25px"> Paldies! Jūsu pasūtījums ir saņemts! </p>
         <p> Tuvākajā laikā mēs ar Jums sazināsimies, lai precizētu pasūtījuma detaļas! </p>

@@ -10,20 +10,20 @@
 <body>
     <div id="vue-app">
         <div class="header-container">
-            <div class="banner-text-container">
-                <span class="banner-text">Eglīte Tev!</span>
-                <div class="banner-contacts">
-                    <span class="banner-text-telephone">T: +371 22222222</span>
-                    <span class="banner-text-email">E: eglitetev@eglitetev.lv</span>
-                </div>
-                <div class="banner-social">
-                    <a href="#" class="fa fa-facebook"></a>
-                    <a href="#" class="fa fa-instagram"></a>
-                    <a href="#" class="fa fa-snapchat-ghost"></a>
+            <div class="header-banner">
+                <div class="banner-text-container">
+                    <span class="banner-text">Eglīte Tev!</span>
+                    <div class="banner-contacts">
+                        <span class="banner-text-telephone">T: +371 22222222</span>
+                        <span class="banner-text-email">E: eglitetev@eglitetev.lv</span>
+                    </div>
+                    <div class="banner-social">
+                        <a href="#" class="fa fa-facebook"></a>
+                        <a href="#" class="fa fa-instagram"></a>
+                        <a href="#" class="fa fa-snapchat-ghost"></a>
+                    </div>
                 </div>
             </div>
-            <a href="/">
-                <img class="banner" src="{{URL::asset('banner_new.jpg')}}" alt="img" /></a>
             <!-- Main navigation panel component -->
             @component('components/nav')
             @endcomponent
@@ -55,7 +55,7 @@
                         <option value="3+">Vairāk</option>
                     </select>
                     <strong>
-                        <p>Cena:<span id="front_price1">0</span></p>
+                        <p>Cena: <span id="front_price1">0</span></p>
                     </strong>
                     <button class="order-button" id="order_button1" @click="appendOrderInfoToForm('danish')">Pasūtīt</button>
                 </p>

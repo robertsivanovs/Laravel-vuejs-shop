@@ -77,6 +77,14 @@ li a:hover {
     background-color: #111;
 }
 
+.header-banner {
+    background-image: url("http://127.0.0.1:8000/banner_new.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 550px;
+}
+
 .banner-text-container {
     width: 100%;
     margin: auto;
@@ -572,21 +580,8 @@ footer ul {
 }
 
 @media screen and (max-width: 600px) {
-
-    .banner-text-container {
-        top: 2rem;
-    }
-
-    .banner-text {
-        font-size: 24px;
-    }
-
-    .banner-contacts {
-        font-size: 14px;
-    }
-
-    .fa {
-        padding: 0;
+    .header-banner {
+        height: 550px;
     }
 
     .container {
@@ -641,9 +636,12 @@ footer ul {
     }
 }
 
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active, 
+.fade-leave-active {
     transition: opacity .5s;
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+}
+
+.fade-enter, 
+.fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
-  }
+}

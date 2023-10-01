@@ -101,14 +101,19 @@ var app = new Vue({
             }
         });
     },
-    methods: {
+    methods: {        
         setPrice(tree_type, event = null) {
             var price_koef = 0;
 
-            if (tree_type == "danish" && event !== null) {
+            if (tree_type == "danish") {
                 $.each(this.tree_prices_sizes.danish, function (index, value) {
                     $.each(value, function (pos, size) {
-                        if (size == event.target.value) {
+                        if (!event) {
+                            if (size == $("#izmeri").val()) {
+                                price_koef = index;
+                            }
+                        }
+                        if (event && size == event.target.value) {
                             price_koef = index;
                         }
                     });
@@ -129,10 +134,15 @@ var app = new Vue({
                     price_koef * $("#skaiti").val();
             }
 
-            if (tree_type == "lv" && event !== null) {
+            if (tree_type == "lv") {
                 $.each(this.tree_prices_sizes.lv, function (index, value) {
                     $.each(value, function (pos, size) {
-                        if (size == event.target.value) {
+                        if (!event) {
+                            if (size == $("#izmeri1").val()) {
+                                price_koef = index;
+                            }
+                        }
+                        if (event && size == event.target.value) {
                             price_koef = index;
                         }
                     });
