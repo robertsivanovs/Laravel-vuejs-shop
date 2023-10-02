@@ -12,20 +12,9 @@
 
 <body>
     <div class="header-container">
-        <div class="header-banner">
-            <div class="banner-text-container">
-                <span class="banner-text">Eglīte Tev!</span>
-                <div class="banner-contacts">
-                    <span class="banner-text-telephone">T: +371 22222222</span>
-                    <span class="banner-text-email">E: eglitetev@eglitetev.lv</span>
-                </div>
-                <div class="banner-social">
-                    <a href="#" class="fa fa-facebook"></a>
-                    <a href="#" class="fa fa-instagram"></a>
-                    <a href="#" class="fa fa-snapchat-ghost"></a>
-                </div>
-            </div>
-        </div>
+        <!-- Header component -->
+        @component('components/header')
+        @endcomponent
         <!-- Main navigation panel component -->
         @component('components/nav')
         @endcomponent

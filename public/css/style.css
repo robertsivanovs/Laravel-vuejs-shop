@@ -56,7 +56,6 @@ ul {
 
 ul {
     background-color: #333;
-    display: block;
     text-align: center;
     top: -15px;
 }
@@ -91,8 +90,13 @@ li a:hover {
     margin: auto;
     text-align: center;
     position: absolute;
-    top: 14rem;
+    top: 12rem;
     font-family: "Lobster", "cursive";
+}
+
+.logo {
+    position: relative; 
+    width: 20%;
 }
 
 .banner-text {
@@ -247,7 +251,8 @@ a.control_prev, a.control_next {
     cursor: pointer;
 }
 
-a.control_prev:hover, a.control_next:hover {
+a.control_prev:hover, 
+a.control_next:hover {
     opacity: 1;
     -webkit-transition: all 0.2s ease;
 }
@@ -569,6 +574,10 @@ footer {
 }
 
 @media screen and (max-width: 700px) {
+    .logo {
+        width: 50%;
+    }
+
     .dole,
     .mols {
         margin-left: 35px;
