@@ -25,21 +25,21 @@ class OrdersController extends Controller
             $validated = $request->validate([
                 'name' => 'required|regex:/[a-zA-Z0-9Ā-Žā-ž\s]{3,}/|max:20',
                 'phone' => 'required|regex:/[0-9+-]{8,}/|max:20',
-                'egles_tips' => 'required|regex:/[a-zA-ZĀ-Žā-ž\s]{5,}/|max:50',
-                'egles_skaits' => 'required|digits:1',
-                'egles_izmers' => 'required|digits:3',
-                'egles_cena' => 'required|numeric|digits_between:2,3',
+                'product-type' => 'required|regex:/[a-zA-ZĀ-Žā-ž\s]{5,}/|max:50',
+                'product-count' => 'required|digits:1',
+                'product-size' => 'required|digits:3',
+                'product-price' => 'required|numeric|digits_between:2,3',
             ]);
 
             // If validation was successfull
             $order_data = [
                 'client_name' => request('name'),
                 'client_phone' => request('phone'),
-                'chrystmas_tree_type' => request('egles_tips'),
-                'chrystmas_tree_amount' => request('egles_skaits'),
-                'chrystmas_tree_size' => request('egles_izmers'),
-                'chrystmas_tree_price' => request('egles_cena'),
-                'delivery' => request('piegade')
+                'chrystmas_tree_type' => request('product-type'),
+                'chrystmas_tree_amount' => request('product-count'),
+                'chrystmas_tree_size' => request('product-size'),
+                'chrystmas_tree_price' => request('product-price'),
+                'delivery' => request('with-delivery')
             ];
 
             // Save order in DB

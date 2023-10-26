@@ -82,7 +82,7 @@ var app = new Vue({
 
         /* Validation for empty or too short clients name or phone number fields */
         /* Rest of the validation is done server-side */
-        $(".pieteikt-pasutijumu").click(function () {
+        $(".apply-order").click(function () {
             if ($("#client-name").val().length < 2) {
                 event.preventDefault();
                 alert("Lūdzu ievadiet vārdu!");
@@ -109,7 +109,7 @@ var app = new Vue({
                 $.each(this.tree_prices_sizes.danish, function (index, value) {
                     $.each(value, function (pos, size) {
                         if (!event) {
-                            if (size == $("#izmeri").val()) {
+                            if (size == $("#danish-tree-sizes").val()) {
                                 price_koef = index;
                             }
                         }
@@ -119,9 +119,9 @@ var app = new Vue({
                     });
                 });
 
-                if ($("#skaiti").val() !== "3+") {
+                if ($("#danish-tree-count").val() !== "3+") {
                     $("#front_price1").html(
-                        price_koef * $("#skaiti").val() + " EUR"
+                        price_koef * $("#danish-tree-count").val() + " EUR"
                     );
                 } else {
                     $("#front_price1").html(
@@ -131,14 +131,14 @@ var app = new Vue({
                         "Individuāli vienojoties telefoniski");
                 }
                 this.tree_prices.danish_tree_price =
-                    price_koef * $("#skaiti").val();
+                    price_koef * $("#danish-tree-count").val();
             }
 
             if (tree_type == "lv") {
                 $.each(this.tree_prices_sizes.lv, function (index, value) {
                     $.each(value, function (pos, size) {
                         if (!event) {
-                            if (size == $("#izmeri1").val()) {
+                            if (size == $("#lv-tree-sizes").val()) {
                                 price_koef = index;
                             }
                         }
@@ -148,9 +148,9 @@ var app = new Vue({
                     });
                 });
 
-                if ($("#skaiti1").val() !== "3+") {
+                if ($("#lv-tree-count").val() !== "3+") {
                     $("#front_price2").html(
-                        price_koef * $("#skaiti1").val() + " EUR"
+                        price_koef * $("#lv-tree-count").val() + " EUR"
                     );
                 } else {
                     $("#front_price2").html(
@@ -160,7 +160,7 @@ var app = new Vue({
                         "Individuāli vienojoties telefoniski");
                 }
                 this.tree_prices.lv_tree_price =
-                    price_koef * $("#skaiti1").val();
+                    price_koef * $("#lv-tree-count").val();
             }
         },
         appendOrderInfoToForm(tree_type) {

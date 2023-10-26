@@ -18,26 +18,25 @@
             @endcomponent
         </div>
         <div class="container">
-            <div class="egle-viens-bilde produkts">
+            <div class="first-product product">
                 <h3> Dāņu nordmann premium extra: </h3>
-                <img id="danu-baltegle" v-if="danish_image" :key="danish_image.id" @click="switchNextImage('danish')" :src="danish_image.src">
+                <img id="danish-product" v-if="danish_image" :key="danish_image.id" @click="switchNextImage('danish')" :src="danish_image.src">
                 <a href="#" class="control_next" @click.prevent="switchNextImage('danish')">></a>
                 <a href="#" class="control_prev" @click.prevent="switchPrevImage('danish')"><</a>
-                <hr>
                 <p class="main-description">
                     <strong> Importa, skaistas un masīvas egles kurām skujas nebirst līdz pat 3 menešiem.
                                 Premium extra augstākās klases šķirne. 
                     </strong>
                 </p>
                 <p>Izmērs (CM):
-                    <select name="izmers" id="izmeri" class="select-css" v-model="tree_sizes.size_danish_tree" @click="setPrice('danish', $event)">
+                    <select name="danish-tree-sizes" id="danish-tree-sizes" class="select-css" v-model="tree_sizes.size_danish_tree" @click="setPrice('danish', $event)">
                         <template v-for="value, key in tree_prices_sizes.danish">
                             <option v-for="price in value" :value="price"> @{{ price }}</option> 
                         </template>                           
                     </select>
                 </p>
                 <p>Skaits:
-                    <select name="skaits" id="skaiti" class="select-css" v-model="tree_amount.amount_danish_tree" @click="setPrice('danish')">
+                    <select name="danish-tree-count" id="danish-tree-count" class="select-css" v-model="tree_amount.amount_danish_tree" @click="setPrice('danish')">
                         <option value="1">1 Gab</option>
                         <option value="2">2 Gab</option>
                         <option value="3">3 Gab</option>
@@ -49,7 +48,8 @@
                     <button class="order-button" id="order_button1" @click="appendOrderInfoToForm('danish')">Pasūtīt</button>
                 </p>
             </div>
-            <div class="egle-divi-bilde produkts">
+
+            <div class="second-product product">
                 <h3> Latviešu audzētavas: </h3>
                 <img id="lat-egle" v-if="lv_image" :key="lv_image.id" @click="switchNextImage('lv')" :src="lv_image.src"/>
                 <a href="#" class="control_next" @click.prevent="switchNextImage('lv')">></a>
@@ -59,14 +59,14 @@
                     <strong>Latvijas audzētavas Ziemassvētku eglītes, skaistas, ļoti kuplas un smaržīgas.</strong>
                 </p>
                 <p>Izmērs (CM):
-                    <select name="izmers2" id="izmeri1" class="select-css" v-model="tree_sizes.size_lv_tree" @click="setPrice('lv', $event)">
+                    <select name="lv-tree-sizes" id="lv-tree-sizes" class="select-css" v-model="tree_sizes.size_lv_tree" @click="setPrice('lv', $event)">
                         <template v-for="value, key in tree_prices_sizes.lv">
                             <option v-for="price in value" :value="price"> @{{ price }}</option> 
                         </template>
                     </select>
                 </p>
                 <p>Skaits:
-                    <select name="skaits" id="skaiti1" class="select-css" v-model="tree_amount.amount_lv_tree" @click="setPrice('lv')">
+                    <select name="lv-tree-count" id="lv-tree-count" class="select-css" v-model="tree_amount.amount_lv_tree" @click="setPrice('lv')">
                         <option value="1">1 Gab</option>
                         <option value="2">2 Gab</option>
                         <option value="3">3 Gab</option>
@@ -88,19 +88,19 @@
                     {{ csrf_field() }}
                     <div class="order-items">
                         <span>Egles tips: @{{ tree_type }}</span>
-                        <input name="egles_tips" id="egles_tips" v-model="tree_type" hidden>
+                        <input name="product-type" id="product-type" v-model="tree_type" hidden>
                         <span>Skaits: @{{ tree_front_amount }} GAB</span>
-                        <input name="egles_skaits" id="egles_skaits" v-model="tree_front_amount" hidden>
+                        <input name="product-count" id="product-count" v-model="tree_front_amount" hidden>
                         <span>Izmērs: @{{ tree_front_size }} CM</span>
-                        <input name="egles_izmers" id="egles_izmers" v-model="tree_front_size" hidden>
+                        <input name="product-size" id="product-size" v-model="tree_front_size" hidden>
                         <span>Cena: @{{ tree_front_price }} EUR</span>
-                        <input name="egles_cena" id="egles_cena" v-model="tree_front_price" hidden>
+                        <input name="product-price" id="product-price" v-model="tree_front_price" hidden>
                     </div>
                     <div class="contact-info">
                         <span>Vārds: </span><input type="text" name="name" id="client-name" required pattern="[a-zA-ZĀ-Žā-ž]{3,}" title="Jūsu vārds - vismaz 3 burti">
                         <span>Telefona Nr.: </span><input type="text" name="phone" id="client-phone" required pattern="[0-9+-]{8,}" title="Jūsu telefona nummurs - vismaz 8 cipari">
-                        <span>Ar piegādi <input type="checkbox" name="piegade"></span>
-                        <input type="submit" value="Pieteikt pasūtījumu" class="pieteikt-pasutijumu">
+                        <span>Ar piegādi <input type="checkbox" name="with-delivery"></span>
+                        <input type="submit" value="Pieteikt pasūtījumu" class="apply-order">
                         <button class="close-popupform-button" @click="show_popupform = !show_popupform">Atgriezties</button>
                 </form>
             </div>

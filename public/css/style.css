@@ -201,15 +201,12 @@ li a:hover {
 /**** INDEX VIEW ****/
 
 /* Christmas tree main divs */
-.produkts {
+.product {
     width: 33%;
     position: relative;
     padding: 1em;
     line-height: 1.5em;
     background: hsla(67, 95%, 95%, 1);
-}
-.egle-viens-bilde,
-.egle-divi-bilde {
     border: solid 5px hsla(0, 95%, 35%, 1);
 }
 
@@ -217,13 +214,13 @@ li a:hover {
     padding: 10px;
 }
 
-#danu-baltegle:hover,
+#danish-product:hover,
 #lat-egle:hover {
     cursor: pointer;
 }
 
 /* Christmas tree images */
-.produkts img {
+.product img {
     width: 100%;
     min-width: 230px;
     min-height: 540px;
@@ -234,7 +231,8 @@ li a:hover {
 }
 
 /* Next button on images to switch christmas tree images */
-a.control_prev, a.control_next {
+a.control_prev, 
+a.control_next {
     position: absolute;
     top: 40%;
     z-index: 8;
@@ -264,7 +262,7 @@ a.control_next {
 
 a.control_prev {
     border-radius: 0 2px 2px 0;
-  }
+}
 
 /** Christmas tree price and size select **/
 .select-css {
@@ -383,7 +381,7 @@ a.control_prev {
 
 /* Order form buttons */
 .order-button,
-.pieteikt-pasutijumu {
+.apply-order {
     box-shadow: 0px 10px 14px -7px #3e7327;
     background: linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
     background-color: #77b55a;
@@ -401,13 +399,13 @@ a.control_prev {
 }
 
 .order-button:hover,
-.pieteikt-pasutijumu:hover {
+.apply-order:hover {
     background: linear-gradient(to bottom, #72b352 5%, #77b55a 100%);
     background-color: #72b352;
 }
 
 .order-button:active,
-.pieteikt-pasutijumu:active {
+.apply-order:active {
     position: relative;
     top: 1px;
 }
@@ -469,6 +467,7 @@ input[type="checkbox"] {
 header h1 {
     text-align: center;
 }
+
 .maltas {
     width: 50%;
     margin: auto;
@@ -489,23 +488,23 @@ header h1 {
     font-size: 26px;
 }
 
-.darba-laiki-dole,
-.darba-laiki-mols {
+.business-hours-dole,
+.business-hours-mols {
     background-color: #006ba1;
 }
 
-.darba-laiki-dole p,
-.adrese-dole p,
-.darba-laiki-mols p,
-.adrese-mols p {
+.mols p, 
+.dole p,
+.maltas p {
     text-align: center;
     padding: 5px;
     color: white;
     font-size: 20px;
     font-family: "Open Sans", sans-serif;
 }
-.adrese-dole,
-.adrese-mols {
+
+.adress-dole,
+.adress-mols {
     background-color: #d51d23;
 }
 
@@ -558,7 +557,7 @@ footer {
 
 /* RESPONSIVITY */
 @media screen and (max-width: 900px) {
-    .egle-divi-bilde {
+    .second-product {
         margin-left: 100px;
     }
 
@@ -596,16 +595,15 @@ footer {
     .container {
         display: block;
     }
-    .egle-viens-bilde,
-    .egle-divi-bilde,
-    .egle-tris-bilde,
-    .egle-cetri-bilde {
+    
+    .product {
         text-align: center;
         width: 100%;
         margin-left: 0px;
         padding: 0;
         border: 0px;
     }
+
     .dole,
     .mols {
         width: 100%;
