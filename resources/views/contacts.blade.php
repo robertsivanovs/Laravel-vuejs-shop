@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{URL::asset('css/magnific-popup.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/style.css')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Scripts / Stylesheets / Meta tags component -->
+    @component('components/scripts')
+    @endcomponent
     <title>Kontakti un atrašanās vietas</title>
 </head>
-
 <body>
     <div class="header-container">
         <!-- Header component -->
@@ -19,11 +15,7 @@
         @component('components/nav')
         @endcomponent
     </div>
-    <header>
-        <h1>KONTAKTI</h1>
-        <hr>
-    </header>
-
+    <h1>KONTAKTI</h1>
     <div class="container">
         <div class="business-centre dole">
             <h3> Tirdzniecības centrs “Dole” </h3>
@@ -65,7 +57,6 @@
     <!-- Footer component -->
     @component('components/footer')
     @endcomponent
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Magnific Popup core JS file -->
     <script src="{{URL::asset('js/jquery.magnific-popup.js')}}"></script>
     <script>
