@@ -1,11 +1,18 @@
 <?php
 
+declare (strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Http\Requests\OrdersRequest;
 
+/**
+ * OrdersController
+ * 
+ * Class used to process user order data
+ * 
+ */
 class OrdersController extends Controller
 {    
     /**
@@ -14,49 +21,44 @@ class OrdersController extends Controller
      * Process order and return user to order review
      * or return error if order validation fails.
      *
-     * @param  mixed $request
-     * @return void
+     * @param OrdersRequest $request
+     * @return \Illuminate\Contracts\View\View
      */
-    public function order(Request $request) {
-
+    public function order(OrdersRequest $request): \Illuminate\Contracts\View\View
+    {
         if ($request->isMethod('post')) {
-
-            // Validation
-            $validated = $request->validate([
-                'name' => 'required|regex:/[a-zA-Z0-9Ā-Žā-ž\s]{3,}/|max:20',
-                'phone' => 'required|regex:/[0-9+-]{8,}/|max:20',
-                'product-type' => 'required|regex:/[a-zA-ZĀ-Žā-ž\s]{5,}/|max:50',
-                'product-count' => 'required|digits:1',
-                'product-size' => 'required|digits:3',
-                'product-price' => 'required|numeric|digits_between:2,3',
-            ]);
-
-            // If validation was successfull
-            $order_data = [
-                'client_name' => request('name'),
-                'client_phone' => request('phone'),
-                'chrystmas_tree_type' => request('product-type'),
-                'chrystmas_tree_amount' => request('product-count'),
-                'chrystmas_tree_size' => request('product-size'),
-                'chrystmas_tree_price' => request('product-price'),
-                'delivery' => request('with-delivery')
-            ];
-
-            // Save order in DB
-            $order = new Order;
-
-            $order->client_name = $order_data['client_name'];
-            $order->client_phone = $order_data['client_phone'];
-            $order->tree_type = $order_data['chrystmas_tree_type'];
-            $order->tree_amount = $order_data['chrystmas_tree_amount'];
-            $order->tree_size = $order_data['chrystmas_tree_size'];
-            $order->price = $order_data['chrystmas_tree_price'];
-            $order->delivery = $order_data['delivery'];
-
+            $orderData = $this->processOrder($request);
             // Return user to order review
-            if ($order->save()) {
-                return view('order')->with('order_data', $order_data);
+            if ($orderData) {
+                return view('order')->with('orderData', $orderData);
             }
         }
+    }
+    
+    /**
+     * processOrder
+     * 
+     * Process user data by validating user input and saving data to DB
+     *
+     * @param OrdersRequest $request
+     * @return array
+     */
+    private function processOrder(OrdersRequest $request): array
+    {
+        $validatedData = $request->validated();
+
+        $orderData = [
+            'client_name' => $validatedData['name'],
+            'client_phone' => $validatedData['phone'],
+            'tree_type' => $validatedData['product-type'],
+            'tree_amount' => $validatedData['product-count'],
+            'tree_size' => $validatedData['product-size'],
+            'price' => $validatedData['product-price'],
+            'delivery' => $request->input('with-delivery', false),
+        ];
+
+        Order::create($orderData);
+        return $orderData;
+
     }
 }
