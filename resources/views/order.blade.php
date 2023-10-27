@@ -21,14 +21,14 @@
         <br>
         <p> Pasūtījuma informācija: </p>
         <hr>
-        <p> Pasūtītāja vārds: <b> <br> {{ $order_data['client_name'] }}</b> </p>
-        <p> Pasūtītāja Telefona nummurs: <b><br> {{ $order_data['client_phone'] }}</b> </p>
-        <p> Egles tips: <b><br> {{ $order_data['chrystmas_tree_type'] }} </b> </p>
-        <p> Skaits: <b><br> {{ $order_data['chrystmas_tree_amount'] }} GAB </b></p>
-        <p> Izmērs: <b><br> {{ $order_data['chrystmas_tree_size'] }} CM </b></p>
-        <p> Summa: <b><br> {{ $order_data['chrystmas_tree_price'] }} </b></p>
+        <p> Pasūtītāja vārds: <b> <br> {{ $orderData['client_name'] }}</b> </p>
+        <p> Pasūtītāja Telefona nummurs: <b><br> {{ $orderData['client_phone'] }}</b> </p>
+        <p> Egles tips: <b><br> {{ $orderData['tree_type'] }} </b> </p>
+        <p> Skaits: <b><br> {{ $orderData['tree_amount'] }} GAB </b></p>
+        <p> Izmērs: <b><br> {{ $orderData['tree_size'] }} CM </b></p>
+        <p> Summa: <b><br> {{ $orderData['price'] }} </b></p>
 
-        @if ($order_data['delivery'] == "on")
+        @if ($orderData['delivery'] == "on")
         <p> Ar piegādi (Adrese tiks precizēta) </p>
         @endif
 
