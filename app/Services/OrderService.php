@@ -4,13 +4,13 @@ declare (strict_types=1);
 namespace App\Services;
 
 use App\Models\Order;
+use App\Contracts\OrderServiceInterface;
 
 /**
  * OrderService
  * 
  */
-class OrderService
-{
+class OrderService implements OrderServiceInterface {
     /**
      * processOrder
      * 
