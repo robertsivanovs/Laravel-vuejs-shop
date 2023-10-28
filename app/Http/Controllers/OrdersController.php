@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrdersRequest;
-use App\Services\OrderService;
+use App\Contracts\OrderServiceInterface;
 
 /**
  * OrdersController
@@ -16,7 +16,7 @@ use App\Services\OrderService;
 class OrdersController extends Controller
 {
     public function __construct(
-        private OrderService $orderService
+        private OrderServiceInterface $orderService
     ) {}
 
     /**
