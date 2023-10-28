@@ -24,12 +24,14 @@ class OrdersRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|regex:/[a-zA-Z0-9Ā-Žā-ž\s]{3,}/|max:20',
-            'phone' => 'required|regex:/[0-9+-]{8,}/|max:20',
-            'product-type' => 'required|regex:/[a-zA-ZĀ-Žā-ž\s]{5,}/|max:50',
+            'name' => ['required', 'regex:/^[\p{L}\s]{3,20}$/u'],
+            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]){8,}$/'],
+            'product-type' => ['required', 'regex:/^[\p{L}\s]{5,50}$/u'],
             'product-count' => 'required|digits:1',
             'product-size' => 'required|digits:3',
-            'product-price' => 'required|numeric|digits_between:2,3',
+            'product-price' => ['required', 'numeric', 'digits_between:2,3'],
+            'with-delivery' => []
         ];
     }
+
 }

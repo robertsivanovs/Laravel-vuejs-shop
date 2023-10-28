@@ -96,7 +96,7 @@
                         <input name="product-price" id="product-price" v-model="tree_front_price" hidden>
                     </div>
                     <div class="contact-info">
-                        <span>Vārds: </span><input type="text" name="name" id="client-name" required pattern="[a-zA-ZĀ-Žā-ž]{3,}" title="Jūsu vārds - vismaz 3 burti">
+                        <span>Vārds: </span><input type="text" name="name" id="client-name" required pattern="[a-zA-Z Ā-Žā-ž]{3,}" title="Jūsu vārds - vismaz 3 burti">
                         <span>Telefona Nr.: </span><input type="text" name="phone" id="client-phone" required pattern="[0-9+-]{8,}" title="Jūsu telefona nummurs - vismaz 8 cipari">
                         <span>Ar piegādi <input type="checkbox" name="with-delivery"></span>
                         <input type="submit" value="Pieteikt pasūtījumu" class="apply-order">

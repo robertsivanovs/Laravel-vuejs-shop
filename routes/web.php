@@ -17,4 +17,5 @@ use App\Http\Controllers\OrdersController;
 
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/contacts', [IndexController::class, 'contacts']);
-Route::post('/orders/order', [OrdersController::class, 'order']);
+// Allow GET to avoid throwing exceptions when user reloads the order results page
+Route::match(['GET','POST'],'/orders/order', [OrdersController::class, 'order']);
