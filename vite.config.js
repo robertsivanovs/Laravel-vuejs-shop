@@ -8,7 +8,6 @@ export default defineConfig({
             'resources/css/app.css',
             'resources/js/app.js',
         ]),
-        // react(),
         vue({
             template: {
                 transformAssetUrls: {
@@ -16,6 +15,11 @@ export default defineConfig({
                     includeAbsolute: false,
                 },
             },
+            resolve: {
+                alias: {
+                    vue: 'vue/dist/vue.esm-bundler.js',
+                },
+            }, 
         }),
     ],
 });
