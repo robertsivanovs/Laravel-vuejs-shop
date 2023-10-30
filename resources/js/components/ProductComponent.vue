@@ -13,7 +13,7 @@
       <p>Izmērs (CM):
         <select name="danish-tree-sizes" id="danish-tree-sizes" class="select-css" v-model="tree_sizes.size_danish_tree" @click="setPrice('danish', $event)">
           <template v-for="value, key in tree_prices_sizes.danish">
-              <option v-for="price in value" :value="price"> @{{ price }}</option> 
+              <option v-for="price in value" :value="price"> {{ price }}</option> 
           </template>                           
         </select>
       </p>
@@ -42,7 +42,7 @@
       <p>Izmērs (CM):
         <select name="lv-tree-sizes" id="lv-tree-sizes" class="select-css" v-model="tree_sizes.size_lv_tree" @click="setPrice('lv', $event)">
           <template v-for="value, key in tree_prices_sizes.lv">
-            <option v-for="price in value" :value="price"> @{{ price }}</option> 
+            <option v-for="price in value" :value="price"> {{ price }}</option> 
           </template>
         </select>
       </p>
@@ -67,13 +67,13 @@
       </div>
       <form class="order-form" name="order_form" id="order_form" action="orders/order" method="POST">
         <div class="order-items">
-          <span>Egles tips: @{{ tree_type }}</span>
+          <span>Egles tips: {{ tree_type }}</span>
           <input name="product-type" id="product-type" v-model="tree_type" hidden>
-          <span>Skaits: @{{ tree_front_amount }} GAB</span>
+          <span>Skaits: {{ tree_front_amount }} GAB</span>
           <input name="product-count" id="product-count" v-model="tree_front_amount" hidden>
-          <span>Izmērs: @{{ tree_front_size }} CM</span>
+          <span>Izmērs: {{ tree_front_size }} CM</span>
           <input name="product-size" id="product-size" v-model="tree_front_size" hidden>
-          <span>Cena: @{{ tree_front_price }} EUR</span>
+          <span>Cena: {{ tree_front_price }} EUR</span>
           <input name="product-price" id="product-price" v-model="tree_front_price" hidden>
         </div>
         <div class="contact-info">
@@ -91,7 +91,12 @@
 
 <script>
 export default {
-  props: ['csrfToken'],
+  props: {
+    csrfToken: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       show_popupform: false,
@@ -142,24 +147,24 @@ export default {
         },
         {
           id: 2,
-          src: "https://eglitetev.lv/egles/nordman/IMG_7391.JPG",
+          src: "../egles/nordman/IMG_7391.JPG",
           alt: "Dāņu nordman",
         },
         {
           id: 3,
-          src: "https://eglitetev.lv/egles/nordman/IMG_7437.JPG",
+          src: "../egles/nordman/IMG_7437.JPG",
           alt: "Dāņu nordman",
         },
       ],
       lv_images: [
         {
           id: 1,
-          src: "https://eglitetev.lv/egles/lat/IMG_4567.jpg",
+          src: "../egles/lat/IMG_4567.jpg",
           alt: "Latviešu audzētavas",
         },
         {
           id: 2,
-          src: "https://eglitetev.lv/egles/lat/IMG_4568.jpg",
+          src: "../egles/lat/IMG_4568.jpg",
           alt: "Latviešu audzētavas",
         },
       ],
@@ -199,126 +204,126 @@ export default {
       if (tree_type == "danish") {
         $.each(this.tree_prices_sizes.danish, function (index, value) {
           $.each(value, function (pos, size) {
-              if (!event) {
-                  if (size == $("#danish-tree-sizes").val()) {
-                      price_koef = index;
-                  }
+            if (!event) {
+              if (size == $("#danish-tree-sizes").val()) {
+                price_koef = index;
               }
-              if (event && size == event.target.value) {
-                  price_koef = index;
-              }
+            }
+            if (event && size == event.target.value) {
+              price_koef = index;
+            }
           });
-      });
+        });
 
-      if ($("#danish-tree-count").val() !== "3+") {
+        if ($("#danish-tree-count").val() !== "3+") {
           $("#front_price1").html(
-              price_koef * $("#danish-tree-count").val() + " EUR"
+            price_koef * $("#danish-tree-count").val() + " EUR"
           );
-      } else {
+        } else {
           $("#front_price1").html(
-              "Individuāli vienojoties telefoniski"
+            "Individuāli vienojoties telefoniski"
           );
           return (this.tree_prices.danish_tree_price =
-              "Individuāli vienojoties telefoniski");
-      }
-      this.tree_prices.danish_tree_price =
+            "Individuāli vienojoties telefoniski");
+        }
+        this.tree_prices.danish_tree_price =
           price_koef * $("#danish-tree-count").val();
-    }
+      }
 
-    if (tree_type == "lv") {
+      if (tree_type == "lv") {
         $.each(this.tree_prices_sizes.lv, function (index, value) {
-            $.each(value, function (pos, size) {
-                if (!event) {
-                    if (size == $("#lv-tree-sizes").val()) {
-                        price_koef = index;
-                    }
-                }
-                if (event && size == event.target.value) {
-                    price_koef = index;
-                }
-            });
+          $.each(value, function (pos, size) {
+            if (!event) {
+              if (size == $("#lv-tree-sizes").val()) {
+                price_koef = index;
+              }
+            }
+            if (event && size == event.target.value) {
+              price_koef = index;
+            }
+          });
         });
 
         if ($("#lv-tree-count").val() !== "3+") {
-            $("#front_price2").html(
-                price_koef * $("#lv-tree-count").val() + " EUR"
-            );
+          $("#front_price2").html(
+            price_koef * $("#lv-tree-count").val() + " EUR"
+          );
         } else {
-            $("#front_price2").html(
-                "Individuāli vienojoties telefoniski"
-            );
-            return (this.tree_prices.lv_tree_price =
-                "Individuāli vienojoties telefoniski");
+          $("#front_price2").html(
+            "Individuāli vienojoties telefoniski"
+          );
+          return (this.tree_prices.lv_tree_price =
+            "Individuāli vienojoties telefoniski");
         }
         this.tree_prices.lv_tree_price =
-            price_koef * $("#lv-tree-count").val();
-    }
-  },
-  appendOrderInfoToForm(tree_type) {
+          price_koef * $("#lv-tree-count").val();
+      }
+    },
+    appendOrderInfoToForm(tree_type) {
       this.tree_type = tree_type;
       this.show_popupform = !this.show_popupform;
 
       if (tree_type === "danish") {
-          this.tree_type = "Dāņu nordman premium extra";
-          this.tree_front_price = this.tree_prices.danish_tree_price;
-          this.tree_front_size = this.tree_sizes.size_danish_tree;
-          this.tree_front_amount = this.tree_amount.amount_danish_tree;
+        this.tree_type = "Dāņu nordman premium extra";
+        this.tree_front_price = this.tree_prices.danish_tree_price;
+        this.tree_front_size = this.tree_sizes.size_danish_tree;
+        this.tree_front_amount = this.tree_amount.amount_danish_tree;
       }
       if (tree_type === "lv") {
-          this.tree_type = "Latviešu audzētavas";
-          this.tree_front_price = this.tree_prices.lv_tree_price;
-          this.tree_front_size = this.tree_sizes.size_lv_tree;
-          this.tree_front_amount = this.tree_amount.amount_lv_tree;
+        this.tree_type = "Latviešu audzētavas";
+        this.tree_front_price = this.tree_prices.lv_tree_price;
+        this.tree_front_size = this.tree_sizes.size_lv_tree;
+        this.tree_front_amount = this.tree_amount.amount_lv_tree;
       }
-  },
-  setDefaultImage() {
+    },
+    setDefaultImage() {
       this.danish_image = this.danish_images[this.indexes.danish_index];
       this.lv_image = this.lv_images[this.indexes.lv_index];
-  },
-  switchNextImage(tree_type) {
+    },
+    switchNextImage(tree_type) {
       if (tree_type === "danish") {
+        this.indexes.danish_index =
+          (this.indexes.danish_index + 1) % this.danish_images.length;
+        this.danish_image = this.danish_images[
+          this.indexes.danish_index
+        ];
+      }
+      if (tree_type === "lv") {
+        this.indexes.lv_index =
+          (this.indexes.lv_index + 1) % this.lv_images.length;
+        this.lv_image = this.lv_images[this.indexes.lv_index];
+      }
+    },
+    switchPrevImage(tree_type) {
+      if (tree_type === "danish") {
+        if (this.indexes.danish_index > 0) {
           this.indexes.danish_index =
-              (this.indexes.danish_index + 1) % this.danish_images.length;
-          this.danish_image = this.danish_images[
+            (this.indexes.danish_index - 1) %
+              this.danish_images.length;
+            this.danish_image = this.danish_images[
               this.indexes.danish_index
-          ];
+            ];
+        } else {
+            this.danish_image = this.danish_images[
+              this.danish_images.length - 1
+            ];
+            this.indexes.danish_index =
+              ([this.danish_images.length] - 1) %
+                this.danish_images.length;
+        }
       }
       if (tree_type === "lv") {
+        if (this.indexes.lv_index > 0) {
           this.indexes.lv_index =
-              (this.indexes.lv_index + 1) % this.lv_images.length;
-          this.lv_image = this.lv_images[this.indexes.lv_index];
+            (this.indexes.lv_index - 1) % this.lv_images.length;
+            this.lv_image = this.lv_images[this.indexes.lv_index];
+        } else {
+          this.lv_image = this.lv_images[this.lv_images.length - 1];
+          this.indexes.lv_index =
+            ([this.lv_images.length] - 1) % this.lv_images.length;
+        }
       }
-  },
-  switchPrevImage(tree_type) {
-      if (tree_type === "danish") {
-          if (this.indexes.danish_index > 0) {
-              this.indexes.danish_index =
-                  (this.indexes.danish_index - 1) %
-                  this.danish_images.length;
-              this.danish_image = this.danish_images[
-                  this.indexes.danish_index
-              ];
-          } else {
-              this.danish_image = this.danish_images[
-                  this.danish_images.length - 1
-              ];
-              this.indexes.danish_index =
-                  ([this.danish_images.length] - 1) %
-                  this.danish_images.length;
-          }
-      }
-      if (tree_type === "lv") {
-          if (this.indexes.lv_index > 0) {
-              this.indexes.lv_index =
-                  (this.indexes.lv_index - 1) % this.lv_images.length;
-              this.lv_image = this.lv_images[this.indexes.lv_index];
-          } else {
-              this.lv_image = this.lv_images[this.lv_images.length - 1];
-              this.indexes.lv_index =
-                  ([this.lv_images.length] - 1) % this.lv_images.length;
-          }
-      }
-  },
+    },
   },
 }
 </script>

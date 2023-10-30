@@ -17,7 +17,7 @@
         @endcomponent
     </div>
     <div id="app">
-        <product-component csrfToken="{{ csrf_token() }}"></product-component>
+        <product-component csrf-token="{{ csrf_token() }}"></product-component>
     </div>
     <!-- Footer component -->
     @component('components/footer')
