@@ -11,21 +11,21 @@
         </strong>
       </p>
       <p>Izmērs (CM):
-        <select name="danish-tree-sizes" id="danish-tree-sizes" class="select-css" v-model="tree_sizes.size_danish_tree" @click="setPrice('danish', $event)">
+        <select name="danish-tree-sizes" id="danish-tree-sizes" class="select-css" v-model="tree_sizes.size_danish_tree">
           <template v-for="value, key in tree_prices_sizes.danish">
               <option v-for="price in value" :value="price"> {{ price }}</option> 
           </template>                           
         </select>
       </p>
       <p>Skaits:
-        <select name="danish-tree-count" id="danish-tree-count" class="select-css" v-model="tree_amount.amount_danish_tree" @click="setPrice('danish')">
+        <select name="danish-tree-count" id="danish-tree-count" class="select-css" v-model="tree_amount.amount_danish_tree">
           <option value="1">1 Gab</option>
           <option value="2">2 Gab</option>
           <option value="3">3 Gab</option>
           <option value="3+">Vairāk</option>
         </select>
         <strong>
-          <p>Cena: <span id="front_price1">0</span></p>
+          <p>Cena: <span id="front_price1"> {{ danishTreePrice }} </span></p>
         </strong>
         <button class="order-button" id="order_button1" @click="appendOrderInfoToForm('danish')">Pasūtīt</button>
       </p>
@@ -40,21 +40,21 @@
         <strong>Latvijas audzētavas Ziemassvētku eglītes, skaistas, ļoti kuplas un smaržīgas.</strong>
       </p>
       <p>Izmērs (CM):
-        <select name="lv-tree-sizes" id="lv-tree-sizes" class="select-css" v-model="tree_sizes.size_lv_tree" @click="setPrice('lv', $event)">
+        <select name="lv-tree-sizes" id="lv-tree-sizes" class="select-css" v-model="tree_sizes.size_lv_tree">
           <template v-for="value, key in tree_prices_sizes.lv">
             <option v-for="price in value" :value="price"> {{ price }}</option> 
           </template>
         </select>
       </p>
       <p>Skaits:</p>
-        <select name="lv-tree-count" id="lv-tree-count" class="select-css" v-model="tree_amount.amount_lv_tree" @click="setPrice('lv')">
+        <select name="lv-tree-count" id="lv-tree-count" class="select-css" v-model="tree_amount.amount_lv_tree">
           <option value="1">1 Gab</option>
           <option value="2">2 Gab</option>
           <option value="3">3 Gab</option>
           <option value="3+">Vairāk</option>
         </select>
         <strong>
-            <p>Cena: <span id="front_price2"> 0 </span></p>
+            <p>Cena: <span id="front_price2"> {{ lvTreePrice }} </span></p>
         </strong>
         <button class="order-button" id="order_button2" @click="appendOrderInfoToForm('lv')">Pasūtīt</button>
     </div>
@@ -132,7 +132,6 @@ export default {
           35: [210, 220, 230],
         },
       },
-
       indexes: {
         danish_index: 0,
         lv_index: 0,
@@ -170,11 +169,17 @@ export default {
       ],
     };
   },
+  computed: {
+    danishTreePrice() {
+      return this.calculateTreePrice('danish');
+    },
+    lvTreePrice() {
+      return this.calculateTreePrice('lv');
+    },
+  },
   mounted() {
     /* Set default product images and prices */
     this.setDefaultImage();
-    this.setPrice("danish");
-    this.setPrice("lv");
 
     /* Validation for empty or too short clients name or phone number fields */
     /* Rest of the validation is done server-side */
@@ -198,66 +203,31 @@ export default {
     });
   },
   methods: {        
-    setPrice(tree_type, event = null) {
-      var price_koef = 0;
+    calculateTreePrice(tree_type) {
+      const treeSizes = this.tree_sizes[`size_${tree_type}_tree`];
+      const treeCount = this.tree_amount[`amount_${tree_type}_tree`];
 
-      if (tree_type == "danish") {
-        $.each(this.tree_prices_sizes.danish, function (index, value) {
-          $.each(value, function (pos, size) {
-            if (!event) {
-              if (size == $("#danish-tree-sizes").val()) {
-                price_koef = index;
-              }
-            }
-            if (event && size == event.target.value) {
-              price_koef = index;
-            }
-          });
-        });
+      if (tree_type === "danish" || tree_type === "lv") {
+        const prices = this.tree_prices_sizes[tree_type];
 
-        if ($("#danish-tree-count").val() !== "3+") {
-          $("#front_price1").html(
-            price_koef * $("#danish-tree-count").val() + " EUR"
-          );
-        } else {
-          $("#front_price1").html(
-            "Individuāli vienojoties telefoniski"
-          );
-          return (this.tree_prices.danish_tree_price =
-            "Individuāli vienojoties telefoniski");
+        let price = 0;
+
+        for (const size in prices) {
+          if (prices.hasOwnProperty(size)) {
+            if (prices[size].includes(treeSizes)) {
+              price = size;
+              break;
+            }
+          }
         }
-        this.tree_prices.danish_tree_price =
-          price_koef * $("#danish-tree-count").val();
-      }
 
-      if (tree_type == "lv") {
-        $.each(this.tree_prices_sizes.lv, function (index, value) {
-          $.each(value, function (pos, size) {
-            if (!event) {
-              if (size == $("#lv-tree-sizes").val()) {
-                price_koef = index;
-              }
-            }
-            if (event && size == event.target.value) {
-              price_koef = index;
-            }
-          });
-        });
-
-        if ($("#lv-tree-count").val() !== "3+") {
-          $("#front_price2").html(
-            price_koef * $("#lv-tree-count").val() + " EUR"
-          );
+        if (treeCount !== "3+") {
+          return price * treeCount + " EUR";
         } else {
-          $("#front_price2").html(
-            "Individuāli vienojoties telefoniski"
-          );
-          return (this.tree_prices.lv_tree_price =
-            "Individuāli vienojoties telefoniski");
+          return "Individuāli vienojoties telefoniski";
         }
-        this.tree_prices.lv_tree_price =
-          price_koef * $("#lv-tree-count").val();
       }
+      return "";
     },
     appendOrderInfoToForm(tree_type) {
       this.tree_type = tree_type;
