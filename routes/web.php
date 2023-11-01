@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\IndexController;
 use App\Http\Controllers\OrdersController;
 
 /*
@@ -15,7 +14,8 @@ use App\Http\Controllers\OrdersController;
 |
 */
 
-Route::get('/', [IndexController::class, 'index']);
-Route::get('/contacts', [IndexController::class, 'contacts']);
+Route::view('/', 'index');
+Route::view('/contacts', 'contacts');
+
 // Allow GET to avoid throwing exceptions when user reloads the order results page
 Route::match(['GET','POST'],'/orders/order', [OrdersController::class, 'order']);

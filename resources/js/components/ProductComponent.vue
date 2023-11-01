@@ -73,7 +73,7 @@
           <input name="product-count" id="product-count" v-model="tree_front_amount" hidden>
           <span>Izmērs: {{ tree_front_size }} CM</span>
           <input name="product-size" id="product-size" v-model="tree_front_size" hidden>
-          <span>Cena: {{ tree_front_price }} EUR</span>
+          <span>Cena: {{ tree_front_price }} </span>
           <input name="product-price" id="product-price" v-model="tree_front_price" hidden>
         </div>
         <div class="contact-info">
@@ -104,7 +104,10 @@ export default {
       tree_front_price: 0,
       tree_front_size: 0,
       tree_front_amount: 0,
-
+      tree_type_labels: {
+        danish: "Dāņu nordman premium extra",
+        lv: "Latviešu audzētavas"
+      },
       tree_sizes: {
         size_lv_tree: 160,
         size_danish_tree: 160,
@@ -232,19 +235,10 @@ export default {
     appendOrderInfoToForm(tree_type) {
       this.tree_type = tree_type;
       this.show_popupform = !this.show_popupform;
-
-      if (tree_type === "danish") {
-        this.tree_type = "Dāņu nordman premium extra";
-        this.tree_front_price = this.tree_prices.danish_tree_price;
-        this.tree_front_size = this.tree_sizes.size_danish_tree;
-        this.tree_front_amount = this.tree_amount.amount_danish_tree;
-      }
-      if (tree_type === "lv") {
-        this.tree_type = "Latviešu audzētavas";
-        this.tree_front_price = this.tree_prices.lv_tree_price;
-        this.tree_front_size = this.tree_sizes.size_lv_tree;
-        this.tree_front_amount = this.tree_amount.amount_lv_tree;
-      }
+      this.tree_front_price = this.calculateTreePrice(tree_type);
+      this.tree_front_size = this.tree_sizes[`size_${tree_type}_tree`];
+      this.tree_front_amount = this.tree_amount[`amount_${tree_type}_tree`];
+      this.tree_type = this.tree_type_labels[tree_type];
     },
     setDefaultImage() {
       this.danish_image = this.danish_images[this.indexes.danish_index];
